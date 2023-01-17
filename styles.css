@@ -1,4 +1,4 @@
-img {
+img.waves-background {
   position: absolute;
   width: 820px;
   z-index: -5;
@@ -60,14 +60,12 @@ input {
   font-size: 18px;
   line-height: 20px;
 }
-.emoji-cloudy {
-  font-size: 80px;
-  line-height: 80px;
-}
 .weather-mood {
-  color: #fff;
+  color: #FEFCF3;
   font-size: 20px;
-  line-height: 40px;
+  line-height: 20px;
+}
+.weather-mood::first-letter {
   text-transform: capitalize;
 }
 .temperature-now {

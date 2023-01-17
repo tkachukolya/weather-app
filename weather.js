@@ -66,6 +66,13 @@ function showTemp(response) {
   let weatherWind = document.querySelector("#now-wind");
   let showWind = Math.round(response.data.wind.speed);
   weatherWind.innerHTML = `Wind: ${showWind} km/h`;
+
+  let weatherIcon = document.querySelector("#icon");
+  weatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  weatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
 function showLocation(position) {

@@ -93,6 +93,11 @@ input {
   top: -180px;
   right: 80px;
 }
+.temperature-now .active{
+  color:#FEFCF3;
+  cursor: default; 
+  text-decoration: none;
+}
 .line {
   font-size: 30px;
   font-weight: 400;

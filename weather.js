@@ -23,20 +23,42 @@ let minutes = currentDate.getMinutes().toString().padStart(2, "0");
 
 todayDate.innerHTML = `${month} ${date}, ${hour}:${minutes}`;
 
+function showForecast() {
+  let weatherForecast = document.querySelector("#forecast");
+
+  let forecastDays = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+
+  let forecastHTML = `<div class="row">`;
+
+  forecastDays.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+         <div class="col-2">
+          <div class="day" id="day-forecast">${day}</div>
+            <div><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="cloudy" id="icon-forecast"/></div>
+            <div class="temperature-everyday">14°/6°</div>
+        </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  weatherForecast.innerHTML = forecastHTML;
+}
+
 function showTemp(response) {
   let h1 = document.querySelector("h1");
-  h1.innerHTML = response.data.name;
+  h1.innerHTML = response.data.city;
 
-  celsiusTemperature = response.data.main.temp;
+  celsiusTemperature = Math.round(response.data.temperature.current);
   let currentTemp = document.querySelector("#temperature");
-  currentTemp.innerHTML = Math.round(celsiusTemperature);
+  currentTemp.innerHTML = Math.round(response.data.temperature.current);
 
   let weatherDescription = document.querySelector("#weather-mood");
-  let showDescription = response.data.weather[0].description;
+  let showDescription = response.data.condition.description;
   weatherDescription.innerHTML = showDescription;
 
   let weatherHumidity = document.querySelector("#now-humidity");
-  let showHumidity = response.data.main.humidity;
+  let showHumidity = response.data.temperature.humidity;
   weatherHumidity.innerHTML = `Humidity: ${showHumidity} km/h`;
 
   let weatherWind = document.querySelector("#now-wind");
@@ -56,7 +78,7 @@ function showCelsius(event) {
   celsius.classList.add("active");
   fahrenheit.classList.remove("active");
   let currentTemp = document.querySelector("#temperature");
-   currentTemp.innerHTML = Math.round(celsiusTemperature);
+  currentTemp.innerHTML = Math.round(celsiusTemperature);
 }
 
 function showFahreinheit(event) {
@@ -65,7 +87,7 @@ function showFahreinheit(event) {
 
   celsius.classList.remove("active");
   fahrenheit.classList.add("active");
-  let fahreinheitTemperature = ((celsiusTemperature * 9) / 5 + 32);
+  let fahreinheitTemperature = (celsiusTemperature * 9) / 5 + 32;
   currentTemp.innerHTML = Math.round(fahreinheitTemperature);
 }
 
@@ -73,15 +95,15 @@ function showLocation(position) {
   let latitude = position.coords.latitude;
   console.log(position.coords.latitude);
   let longitude = position.coords.longitude;
-  let apiKey = "8402ccd9e55983fce71eeeaa1d2bd1fc";
-  let cityUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+  let apiKey = "315oe2550fe0b32f10t94f5ba94680a6";
+  let cityUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}`;
 
   axios.get(cityUrl).then(showTemp);
 }
 
 function getCurrentCity(cityName) {
-  let apiKey = "8402ccd9e55983fce71eeeaa1d2bd1fc";
-  let cityUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`;
+  let apiKey = "315oe2550fe0b32f10t94f5ba94680a6";
+  let cityUrl = `https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
 
   axios.get(cityUrl).then(showTemp);
 }
@@ -109,3 +131,4 @@ searchform.addEventListener("submit", getCity);
 let searchCity = document.querySelector("#current-button");
 searchCity.addEventListener("click", getLocation);
 
+showForecast();

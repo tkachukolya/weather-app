@@ -22,24 +22,45 @@
   </head>
   <body>
     <div class="container">
-        <img src="images/waves-background.jpg" alt="Black waves" class="waves-background" />
+      <img
+        src="images/waves-background.jpg"
+        alt="Black waves"
+        class="waves-background"
+      />
       <form id="search-form">
         <div class="mb-3">
-           <input type="text" class="location-form" id="search-input" placeholder="location">
+          <input
+            type="text"
+            class="location-form"
+            id="search-input"
+            placeholder="location"
+          />
           <input
             type="submit"
             id="search-button"
             class="button"
             value="search"
           />
-          <input type="submit" id="current-button" class="button" value="current"/>
+          <input
+            type="submit"
+            id="current-button"
+            class="button"
+            value="current"
+          />
         </div>
       </form>
 
       <h1>Berlin</h1>
       <ul class="weather-today">
         <li class="current-date" id="current-date">January 1, 12:00</li>
-         <li><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="cloudy" id="icon" class="emoji"/></li>
+        <li>
+          <img
+            src="http://openweathermap.org/img/wn/10d@2x.png"
+            alt="cloudy"
+            id="icon"
+            class="emoji"
+          />
+        </li>
         <li class="weather-mood" id="weather-mood">Mostly cloudy</li>
       </ul>
       <div class="temperature-now">
@@ -59,41 +80,15 @@
         <span class="daily">Daily</span>
         <span class="details">Details</span>
       </div>
-        </ul>
       <hr />
-      <div class="day-of-the-week">
-        <div class="container text-center">
-          <div class="row">
-            <div class="col-2">
-              <div class="day">MON</div>
-              <div class="emoji-weather">☁️</div>
-              <div class="temperature-everyday">14°/6°</div>
-            </div>
-            <div class="col-2">
-              <div class="day">TUE</div>
-              <div class="emoji-weather">🌧️</div>
-              <div class="temperature-everyday">8°/5°</div>
-            </div>
-            <div class="col-2">
-              <div class="day">WED</div>
-              <div class="emoji-weather">🌧️</div>
-              <div class="temperature-everyday">9°/7°</div>
-            </div>
-            <div class="col-2">
-              <div class="day">THU</div>
-              <div class="emoji-weather">🌧️</div>
-              <div class="temperature-everyday">8°/4°</div>
-            </div>
-            <div class="col-2">
-              <div class="day">FRI</div>
-              <div class="emoji-weather">🌧️</div>
-              <div class="temperature-everyday">8°/1°</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="day-of-the-week" id="forecast"></div>
     </div>
-    <div class="creator"><a href="https://github.com/tkachukolya/weather-app" target="_blank" >Open-source code</a> by Olha Tkachuk</div>
+    <div class="creator">
+      <a href="https://github.com/tkachukolya/weather-app" target="_blank"
+        >Open-source code</a
+      >
+      by Olha Tkachuk
+    </div>
     <script src="weather.js"></script>
   </body>
 </html>

@@ -25,6 +25,13 @@ function formatDate(timestamp) {
   return `${month} ${date}, ${hour}:${minutes}`;
 }
 
+function showDay(timestamp) {
+  let currentDate = new Date(timestamp * 1000);
+  let day = currentDate.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 function showForecast(response) {
   let forecast = response.data.daily;
 
@@ -32,15 +39,21 @@ function showForecast(response) {
 
   let forecastHTML = `<div class="row">`;
 
-  forecast.forEach(function (forecastDay) {
-    forecastHTML =
-      forecastHTML +
-      `
-         <div class="col-2">
-          <div class="day" id="day-forecast">${forecastDay.time}</div>
-            <div><img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png"   id="icon-forecast"/></div>
-            <div class="temperature-everyday">${forecastDay.temperature.maximum}°/${forecastDay.temperature.minimum}°</div>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+         <div class="col-2" id="forecast-java">
+          <div class="day" id="day-forecast">${showDay(forecastDay.time)}</div>
+            <div><img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+              forecastDay.condition.icon
+            }.png"  id="icon-forecast"/></div>
+            <div class="temperature-everyday">${Math.round(
+              forecastDay.temperature.maximum
+            )}°/${Math.round(forecastDay.temperature.minimum)}°</div>
         </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -48,7 +61,9 @@ function showForecast(response) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
+  let apiKey = "315oe2550fe0b32f10t94f5ba94680a6";
+  let forecastUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  axios.get(forecastUrl).then(showForecast);
 }
 
 function showTemp(response) {

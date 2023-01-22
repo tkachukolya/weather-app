@@ -17,8 +17,8 @@ h1 {
 }
 hr {
   color: #858a98;
-  padding: 15px 30px;
-  margin: 0 auto;
+  padding: 15px 15px;
+  margin: 35px 30px;
   width: 760px;
   border-width: 3px;
   opacity: 0.8;
@@ -121,20 +121,10 @@ input {
   top: -15px;
   right: 135px;
 }
-.options {
-  width: 350px;
-  padding: 5px 20px;
-  color: #858a98;
-  font-weight: 400;
-  line-height: 15px;
-  font-size: 18px;
-  transition: all 200ms ease-in-out;
-  cursor: pointer;
-}
 .day-of-the-week {
-  margin: -25px auto;
+  margin: -40px auto;
   width: 820px;
-  line-height: 20px;
+  line-height: 30px;
   text-align: center;
 }
 .day {

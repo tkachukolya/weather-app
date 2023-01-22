@@ -36,7 +36,7 @@ function showForecast() {
       `
          <div class="col-2">
           <div class="day" id="day-forecast">${day}</div>
-            <div><img src="http://openweathermap.org/img/wn/10d@2x.png" alt="cloudy" id="icon-forecast"/></div>
+            <div><img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png" alt="clear" id="icon-forecast"/></div>
             <div class="temperature-everyday">14°/6°</div>
         </div>`;
   });
@@ -68,9 +68,9 @@ function showTemp(response) {
   let weatherIcon = document.querySelector("#icon");
   weatherIcon.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
-  weatherIcon.setAttribute("alt", response.data.weather[0].description);
+  weatherIcon.setAttribute("alt", response.data.condition.icon);
 }
 
 function showCelsius(event) {

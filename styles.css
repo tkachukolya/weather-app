@@ -17,7 +17,7 @@ h1 {
 }
 hr {
   color: #858a98;
-  padding: 20px 30px;
+  padding: 15px 30px;
   margin: 0 auto;
   width: 760px;
   border-width: 3px;
@@ -130,27 +130,6 @@ input {
   font-size: 18px;
   transition: all 200ms ease-in-out;
   cursor: pointer;
-}
-.hourly {
-  padding: 5px 15px;
-}
-.hourly:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-.daily {
-  padding: 5px 15px;
-}
-.daily:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-.details {
-  padding: 5px 15px;
-}
-.details:hover {
-  color: #fff;
-  text-decoration: underline;
 }
 .day-of-the-week {
   margin: -25px auto;

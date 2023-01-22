@@ -1,48 +1,54 @@
-let currentDate = new Date();
-let todayDate = document.querySelector("#current-date");
+function formatDate(timestamp) {
+  let currentDate = new Date(timestamp);
 
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+  let date = currentDate.getDate();
 
-let date = currentDate.getDate();
-let month = months[currentDate.getMonth()];
-let hour = currentDate.getHours();
-let minutes = currentDate.getMinutes().toString().padStart(2, "0");
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-todayDate.innerHTML = `${month} ${date}, ${hour}:${minutes}`;
+  let month = months[currentDate.getMonth()];
+  let hour = currentDate.getHours();
+  let minutes = currentDate.getMinutes().toString().padStart(2, "0");
 
-function showForecast() {
+  return `${month} ${date}, ${hour}:${minutes}`;
+}
+
+function showForecast(response) {
+  let forecast = response.data.daily;
+
   let weatherForecast = document.querySelector("#forecast");
-
-  let forecastDays = ["Thu", "Fri", "Sat", "Sun", "Mon"];
 
   let forecastHTML = `<div class="row">`;
 
-  forecastDays.forEach(function (day) {
+  forecast.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
       `
          <div class="col-2">
-          <div class="day" id="day-forecast">${day}</div>
-            <div><img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png" alt="clear" id="icon-forecast"/></div>
-            <div class="temperature-everyday">14°/6°</div>
+          <div class="day" id="day-forecast">${forecastDay.time}</div>
+            <div><img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png"   id="icon-forecast"/></div>
+            <div class="temperature-everyday">${forecastDay.temperature.maximum}°/${forecastDay.temperature.minimum}°</div>
         </div>`;
   });
 
   forecastHTML = forecastHTML + `</div>`;
   weatherForecast.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
 }
 
 function showTemp(response) {
@@ -65,12 +71,17 @@ function showTemp(response) {
   let showWind = Math.round(response.data.wind.speed);
   weatherWind.innerHTML = `Wind: ${showWind} km/h`;
 
+  let showDate = document.querySelector("#current-date");
+  showDate.innerHTML = formatDate(response.data.time * 1000);
+
   let weatherIcon = document.querySelector("#icon");
   weatherIcon.setAttribute(
     "src",
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   weatherIcon.setAttribute("alt", response.data.condition.icon);
+
+  getForecast(response.data.coordinates);
 }
 
 function showCelsius(event) {
@@ -130,5 +141,3 @@ let searchform = document.querySelector("#search-form");
 searchform.addEventListener("submit", getCity);
 let searchCity = document.querySelector("#current-button");
 searchCity.addEventListener("click", getLocation);
-
-showForecast();

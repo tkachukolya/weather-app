@@ -19,7 +19,7 @@ function formatDate(timestamp) {
   ];
 
   let month = months[currentDate.getMonth()];
-  let hour = currentDate.getHours();
+  let hour = currentDate.getHours().toString().padStart(2, "0");
   let minutes = currentDate.getMinutes().toString().padStart(2, "0");
 
   return `${month} ${date}, ${hour}:${minutes}`;
@@ -44,7 +44,7 @@ function showForecast(response) {
       forecastHTML =
         forecastHTML +
         `
-         <div class="col-2" id="forecast-java">
+         <div class="col-2">
           <div class="day" id="day-forecast">${showDay(forecastDay.time)}</div>
             <div><img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
               forecastDay.condition.icon
@@ -110,19 +110,16 @@ function showCelsius(event) {
 function showFahreinheit(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#temperature");
-
   celsius.classList.remove("active");
   fahrenheit.classList.add("active");
   let fahreinheitTemperature = (celsiusTemperature * 9) / 5 + 32;
   currentTemp.innerHTML = Math.round(fahreinheitTemperature);
 }
-
 function showLocation(position) {
   let latitude = position.coords.latitude;
-  console.log(position.coords.latitude);
   let longitude = position.coords.longitude;
   let apiKey = "315oe2550fe0b32f10t94f5ba94680a6";
-  let cityUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}`;
+  let cityUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=metric`;
 
   axios.get(cityUrl).then(showTemp);
 }
@@ -150,9 +147,13 @@ celsius.addEventListener("click", showCelsius);
 
 let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", showFahreinheit);
+
 let celsiusTemperature = null;
 
 let searchform = document.querySelector("#search-form");
 searchform.addEventListener("submit", getCity);
+
 let searchCity = document.querySelector("#current-button");
 searchCity.addEventListener("click", getLocation);
+
+getCurrentCity("Berlin");

@@ -17,8 +17,8 @@ h1 {
 }
 hr {
   color: #858a98;
-  padding: 15px 15px;
-  margin: 35px 30px;
+  padding: 10px 15px;
+  margin: 50px 30px;
   width: 760px;
   border-width: 3px;
   opacity: 0.8;
@@ -62,8 +62,8 @@ input {
 }
 .weather-mood {
   color: #fefcf3;
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 18px;
+  line-height: 15px;
 }
 .weather-mood::first-letter {
   text-transform: capitalize;
@@ -122,7 +122,7 @@ input {
   right: 135px;
 }
 .day-of-the-week {
-  margin: -40px auto;
+  margin: -55px auto;
   width: 820px;
   line-height: 30px;
   text-align: center;
